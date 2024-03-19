@@ -19,6 +19,8 @@ namespace MauiApp1
     		builder.Logging.AddDebug();
 #endif
 
+            builder.Services.AddFilePicker(); // external dependency
+
             return builder.Build();
         }
     }
