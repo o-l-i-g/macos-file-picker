@@ -20,13 +20,20 @@ namespace MauiApp1
 
             IPickFile? selectedFile = await newFilePicker.PickFileAsync("Pick a file", null);
 
-            if(selectedFile is null) // for MacOS this is always null. Verified working on Windows.
+            if (selectedFile is null) // for MacOS this is always null. Verified working on Windows.
             {
                 TextToUpdate.Text = "No file was selected.";
                 return;
             }
 
-            TextToUpdate.Text = $"Selected file name: {selectedFile.FileName}";
+            if (selectedFile.FileResult is null)
+            {
+                TextToUpdate.Text = $"Selected file name: {selectedFile.FileName} but file result was null";
+                return;
+            }
+
+            // this library works to this point -- but doesn't return the full path which makes it useless
+            TextToUpdate.Text = $"Selected file path: {selectedFile.FileResult.FullPath}";
         }
     }
 
